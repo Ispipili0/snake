@@ -1,13 +1,25 @@
 #include "../include/game.h"
 
-Game::Game()
+Game::Game():visual(new Visual())
 {
 	SDLInit();
 	RendererInit();
+
+	setModules();
+	
 }
 
 Game::~Game()
-{}
+{
+	SDL_DestroyRenderer(ren);
+	SDL_DestroyWindow(win);
+	SDL_Quit();
+}
+
+void Game::setModules()
+{
+	visual->setRenderer(ren);
+}
 
 void Game::start()
 {
@@ -15,6 +27,8 @@ void Game::start()
 
 	while(true)
 	{
+		visual->draw();
+
 		SDL_PollEvent(&event);
 
 		if(event.type == SDL_QUIT)

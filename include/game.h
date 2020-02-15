@@ -2,12 +2,19 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
+#include <memory>
+
+#include "Visual.h"
+
+using namespace std;
 
 class Game
 {
 	public:
 		Game();
 		~Game();
+
+		void setModules();
 
 		void start();
 
@@ -20,8 +27,7 @@ class Game
 		SDL_Renderer* ren;
 		//
 		
-		void startGameWhile();
-
+		unique_ptr<Visual> visual;
 
 };
 
