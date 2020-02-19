@@ -3,21 +3,27 @@
 
 #include <SDL2/SDL.h>
 #include <memory>
+#include "../Geometry.h"
+#include "PhysicsElement.h"
 
 using namespace std;
 
-class VisualElement
+class VisualElement: public PhysicsElement
 {
 	public:
-		VisualElement(SDL_Texture* tex, const shared_ptr<SDL_Rect>& rect);
+		VisualElement(SDL_Texture* tex, const Rectangle& rect);
 		virtual ~VisualElement();
 
 		void draw(SDL_Renderer* ren);
 
 	private:
 		SDL_Texture* tex;
-		shared_ptr<SDL_Rect> rect;
 
+	public:
+		virtual string getActorType()
+		{
+			return "VisualElement";
+		}
 
 };
 

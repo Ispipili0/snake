@@ -1,0 +1,23 @@
+Snake{
+	height: 100.0f,
+	width: 100.0f,
+	x_position: 0.0f,
+	y_position: 0.0f,
+	texture: distr/textures/1.jpg
+}
+
+SnakeBody{
+	height: 100.0f,
+	width: 100.0f,
+	x_position: 0.0f,
+	y_position: 100.0f,
+	texture: distr/textures/1.jpg
+}
+
+Apple{
+	height: 50.0f,
+	width: 50.0f,
+	x_position: 75.0f,
+	y_position: 75.0f,
+	texture: distr/textures/1.jpg
+}

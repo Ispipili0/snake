@@ -3,8 +3,9 @@
 
 #include <SDL2/SDL.h>
 #include <memory>
+#include <string>
 
-#include "Visual.h"
+#include "Scene.h"
 
 using namespace std;
 
@@ -13,8 +14,6 @@ class Game
 	public:
 		Game();
 		~Game();
-
-		void setModules();
 
 		void start();
 
@@ -25,9 +24,12 @@ class Game
 		
 		SDL_Window* win;
 		SDL_Renderer* ren;
+
 		//
 		
-		unique_ptr<Visual> visual;
+		Scene* scene;
+
+
 
 };
 

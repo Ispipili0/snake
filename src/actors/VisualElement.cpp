@@ -1,8 +1,8 @@
 #include "../../include/actors/VisualElement.h"
 
 
-VisualElement::VisualElement(SDL_Texture* tex, const shared_ptr<SDL_Rect>& rect):tex(tex),
-	rect(rect)
+VisualElement::VisualElement(SDL_Texture* tex, const Rectangle& rect):tex(tex),
+	PhysicsElement(rect)
 {}
 
 VisualElement::~VisualElement()
@@ -12,5 +12,6 @@ VisualElement::~VisualElement()
 
 void VisualElement::draw(SDL_Renderer* ren)
 {
-	SDL_RenderCopy(ren, tex, NULL, &(*rect));
+	SDL_Rect r = rect.getSDLRect();
+	SDL_RenderCopy(ren, tex, NULL, &r);
 }

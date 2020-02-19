@@ -1,40 +1,36 @@
 #include "../include/game.h"
 
-Game::Game():visual(new Visual())
+Game::Game():
+	scene(new Scene())
 {
 	SDLInit();
 	RendererInit();
-
-	setModules();
 	
 }
 
 Game::~Game()
 {
+	delete scene;
+
 	SDL_DestroyRenderer(ren);
 	SDL_DestroyWindow(win);
 	SDL_Quit();
-}
-
-void Game::setModules()
-{
-	visual->setRenderer(ren);
 }
 
 void Game::start()
 {
 	SDL_Event event;
 
-	while(true)
+	scene->load("distr/level1.data",ren);
+
+	scene->startController();
+
+	while(scene->running)
 	{
-		visual->draw();
 
-		SDL_PollEvent(&event);
+		scene->tick();
+		scene->draw(ren);
 
-		if(event.type == SDL_QUIT)
-		{
-			break;
-		}
 	}
 }
 
