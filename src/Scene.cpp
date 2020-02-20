@@ -199,9 +199,9 @@ void Scene::draw(SDL_Renderer* ren)
 {
 	SDL_RenderClear(ren);
 
-	for(auto i = objects.begin(); i != objects.end(); i++)
+	for(int i(objects.size()-1); i>=0; i--)
 	{
-		(*i)->draw(ren);
+		objects[i]->draw(ren);
 	}
 
 	SDL_RenderPresent(ren);
@@ -214,6 +214,11 @@ void Scene::tick()
 	for(auto i = objects.begin(); i != objects.end(); i++)
 	{
 		(*i)->tick();
+	}
+
+	if(hero->checkElementsInTurn())
+	{
+		objects.push_back(hero->getElementFromTurn());
 	}
 
 	checkTouchs();
@@ -270,10 +275,11 @@ bool Scene::circleVsCircle(shared_ptr<Actor> circle1, shared_ptr<Actor> circle2)
 {
 	float lengthDifferentOfPos = 
 		abs(
-			circle1->getCenter().getLength() - circle2->getCenter().getLength()
+			(circle1->getCenter()- circle2->getCenter()).getLength()
 		);
 	
-	if(lengthDifferentOfPos <= (circle1->getRadius()+circle2->getRadius()))return true;
+	if(lengthDifferentOfPos <= (circle1->getRadius()+circle2->getRadius()))
+		return true;
 	
 	return false;
 	
@@ -332,10 +338,6 @@ void Scene::eventListener()
 
 		controlHero(event);
 
-		if(hero->checkElementsInTurn())
-		{
-			objects.push_back(hero->getElementFromTurn());
-		}
 	}
 }
 
@@ -356,10 +358,6 @@ void Scene::controlHero(const SDL_Event& event)
 	else if(event.key.keysym.sym == 's')
 	{
 		hero->moveIn(Vec(0.0f, 1.0f));
-	}
-	else if(event.key.keysym.sym == 'q')
-	{
-		hero->createNewElement();
 	}
 }
 
