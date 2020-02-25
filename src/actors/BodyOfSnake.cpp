@@ -40,7 +40,7 @@ void BodyOfSnake::stalk()
 	if(normalPos.y < 0)normalPos.y = -normalPos.y;
 
 	//normal /= Vec(normalPos.x+normalPos.y, normalPos.x+normalPos.y);
-	normal /= Vec(100.0f, 100.0f);
+	normal /= Vec(10.0f, 10.0f);
 
 	setSpeed(normal);
 }
